@@ -509,7 +509,7 @@
                 <select id="opcao-entrega">
                     <option value="Motoboy">🛵 Motoboy</option>
                     <option value="99 Entrega">🚗 99 Entrega</option>
-                    <option value="Entrega na Praia">🏖️️ Entrega Direto na Praia</option>
+                    <option value="Entrega na Praia">🏖 Entrega Direto na Praia</option>
                     <option value="Correios">📦 Correios</option>
                 </select>
             </div>
@@ -535,8 +535,8 @@
 
     <script>
         const produtos = [
-            { id: 1, nome: "EBCREATE BC PRO 2026", sabor: "Blackberry Grape", img: "EBCREATE BC PRO 2026 Blackberry Grape.WEBP", preco: 119.99 },
-            { id: 2, nome: "EBCREATE BC PRO 2026", sabor: "Watermelon Peach Frost", img: "EBCREATE BC PRO 2026 Watermelon Peach Frost.WEBP", preco: 119.99 },
+            { id: 1, nome: "EBCREATE BC PRO 2026", sabor: "Blackberry Grape", img: "Blackberry Grape.WEBP", preco: 119.99 },
+            { id: 2, nome: "EBCREATE BC PRO 2026", sabor: "Watermelon Peach Frost", img: "Watermelon Peach Frost.WEBP", preco: 119.99 },
             { id: 3, nome: "EBCREATE BC PRO 2026", sabor: "Triple Berry", img: "Triple Berry.JPG", preco: 119.99 },
             { id: 4, nome: "EBCREATE BC PRO 2026", sabor: "Toasted Pineapple", img: "Toasted Pineapple.JPG", preco: 119.99 },
             { id: 5, nome: "EBCREATE BC PRO 2026", sabor: "Black Mint", img: "Black Mint.JPG", preco: 119.99 },
@@ -559,7 +559,7 @@
                 <div class="card">
                     <div>
                         <div class="card-img-wrapper">
-                            <img src="${p.img}" alt="${p.sabor}" onerror="this.src='https://via.placeholder.com/300x300/1e293b/ffffff?text=${encodeURIComponent(p.sabor)}'">
+                            <img src="${encodeURIComponent(p.img)}" alt="${p.sabor}" onerror="this.src='https://via.placeholder.com/300x300/1e293b/ffffff?text=${encodeURIComponent(p.sabor)}'">
                         </div>
                         <h3>${p.nome}</h3>
                         <div class="flavor"><i class="fa-solid fa-wine-glass-stripe"></i> ${p.sabor}</div>
