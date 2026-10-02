@@ -37,6 +37,29 @@
             overflow-x: hidden;
         }
 
+        /* Banner de Promoção de Destaque */
+        .promo-top-bar {
+            background: linear-gradient(90deg, var(--sunset-pink), var(--sunset-orange), var(--sunset-yellow));
+            color: #fff;
+            text-align: center;
+            padding: 12px 15px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            animation: pulseBanner 2s infinite alternate;
+        }
+
+        @keyframes pulseBanner {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.01); }
+        }
+
         /* Modal de Maioridade */
         #age-modal {
             position: fixed;
@@ -112,7 +135,7 @@
         .hero-banner {
             background: linear-gradient(180deg, rgba(74, 21, 75, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%),
                         radial-gradient(circle at 50% 30%, #f7b801 0%, #ff6b35 35%, #d81159 70%, #0f172a 100%);
-            padding: 60px 20px 40px;
+            padding: 50px 20px 40px;
             text-align: center;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -121,7 +144,7 @@
 
         .nav-bar {
             position: absolute;
-            top: 20px;
+            top: 15px;
             left: 5%;
             right: 5%;
             display: flex;
@@ -232,6 +255,7 @@
             justify-content: space-between;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            position: relative;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -357,8 +381,20 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
+        .promo-cart-alert {
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid var(--sunset-orange);
+            color: var(--sunset-yellow);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
         .delivery-select {
-            margin-top: 15px;
+            margin-top: 10px;
             background: rgba(30, 41, 59, 0.8);
             padding: 12px;
             border-radius: 10px;
@@ -450,6 +486,11 @@
 </head>
 <body>
 
+    <!-- Faixa de Promoção no Topo -->
+    <div class="promo-top-bar">
+        🔥 PROMOÇÃO ESPECIAL: LEVANDO 2 OU MAIS UNIDADES GANHA UM DESCONTÃO! 🔥
+    </div>
+
     <!-- Verificação de Idade +18 -->
     <div id="age-modal">
         <div class="modal-content">
@@ -500,8 +541,13 @@
             <h3 style="color:#fff;"><i class="fa-solid fa-cart-shopping"></i> Seu Pedido</h3>
             <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div class="cart-body" id="cart-items">
-            <p style="color: var(--text-muted); text-align: center; margin-top: 20px;">Nenhum produto selecionado.</p>
+        <div class="cart-body">
+            <div class="promo-cart-alert">
+                🎁 <strong>DICA PROMO:</strong> Adicione 2 ou mais unidades para garantir o seu DESCONTÃO!
+            </div>
+            <div id="cart-items">
+                <p style="color: var(--text-muted); text-align: center; margin-top: 20px;">Nenhum produto selecionado.</p>
+            </div>
         </div>
         <div class="cart-footer">
             <div class="delivery-select">
@@ -592,7 +638,8 @@
             const count = document.getElementById('cart-count');
             const totalEl = document.getElementById('cart-total');
 
-            count.innerText = carrinho.reduce((acc, item) => acc + item.qtd, 0);
+            const totalQtd = carrinho.reduce((acc, item) => acc + item.qtd, 0);
+            count.innerText = totalQtd;
 
             if (carrinho.length === 0) {
                 container.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 20px;">Nenhum produto selecionado.</p>';
@@ -627,6 +674,7 @@
             if (carrinho.length === 0) return alert('Seu carrinho está vazio!');
 
             const tipoEntrega = document.getElementById('opcao-entrega').value;
+            const totalQtd = carrinho.reduce((acc, item) => acc + item.qtd, 0);
             let texto = "Olá! Gostaria de finalizar meu pedido no *VAPE EXPRESS*:%0A%0A";
             let total = 0;
 
@@ -636,7 +684,12 @@
             });
 
             texto += `%0A*Forma de Entrega:* ${tipoEntrega}`;
-            texto += `%0A*Total: R$ ${total.toFixed(2).replace('.', ',')}*%0APagamento via: (PixGo / Cartão)`;
+            
+            if (totalQtd >= 2) {
+                texto += `%0A🔥 *PROMO APLICADA:* Cliente levou 2+ unidades e tem direito ao descontão no atendimento!`;
+            }
+
+            texto += `%0A*Total: R$ ${total.toFixed(2).replace('.', ',')}*`;
 
             window.open(`https://wa.me/5512981029417?text=${texto}`, '_blank');
         }
