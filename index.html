@@ -3,425 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VapeExpress | EBCREATE BC PRO 2026</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0b0f17',
-                        cardBg: '#131924',
-                        cardBorder: '#1e293b',
-                        brandGold: '#f59e0b',
-                        brandAccent: '#3b82f6',
-                        whatsapp: '#25D366'
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome -->
+    <title>VAPE EXPRESS | Vibes do Litoral</title>
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0b0f17; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+        :root {
+            --sunset-orange: #ff6b35;
+            --sunset-purple: #4a154b;
+            --sunset-pink: #d81159;
+            --sunset-yellow: #f7b801;
+            --ocean-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --border-glow: rgba(255, 107, 53, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--ocean-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Modal de Maioridade */
+        #age-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid var(--sunset-orange);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .modal-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--sunset-yellow);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, var(--sunset-orange), var(--sunset-pink));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        .btn-yes:hover { transform: translateY(-2px); }
+
+        .btn-no {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+        }
+        .btn-no:hover { border-color: #fff; color: #fff; }
+
+        /* Banner Pôr do Sol (Header / Hero) */
+        .hero-banner {
+            background: linear-gradient(180deg, rgba(74, 21, 75, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%),
+                        radial-gradient(circle at 50% 30%, #f7b801 0%, #ff6b35 35%, #d81159 70%, #0f172a 100%);
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-bottom: 2px solid var(--sunset-orange);
+        }
+
+        .nav-bar {
+            position: absolute;
+            top: 20px;
+            left: 5%;
+            right: 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .cart-btn:hover { background: var(--sunset-orange); }
+
+        .brand-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #ffffff, var(--sunset-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 30px;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .brand-subtitle {
+            font-size: 1.1rem;
+            color: var(--sunset-yellow);
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .beach-vibes {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Container & Produtos */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 5%;
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i { color: var(--sunset-orange); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--sunset-orange);
+            box-shadow: 0 12px 25px rgba(255, 107, 53, 0.25);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 220px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .card .flavor {
+            color: var(--sunset-yellow);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .btn-add {
+            background: linear-gradient(45deg, var(--sunset-orange), var(--sunset-pink));
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+        .btn-add:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Carrinho Lateral */
+        #cart-modal {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: #0f172a;
+            border-left: 2px solid var(--sunset-orange);
+            z-index: 1000;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+        }
+        #cart-modal.open { right: 0; }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(45deg, var(--sunset-purple), #0f172a);
+        }
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .cart-body {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            background: #090d16;
+        }
+
+        .total-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .btn-checkout {
+            background: #25d366;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: 0.3s;
+        }
+        .btn-checkout:hover { background: #20ba5a; transform: translateY(-2px); }
+
+        /* Botão Flutuante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            z-index: 99;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: #090d16;
+        }
     </style>
 </head>
-<body class="bg-darkBg text-gray-100 min-h-screen flex flex-col selection:bg-brandAccent selection:text-white">
+<body>
 
-    <div id="ageModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md px-4">
-        <div class="bg-cardBg border border-cardBorder rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
-            <div class="w-14 h-14 bg-brandAccent/10 text-brandAccent rounded-full flex items-center justify-center mx-auto mb-5 text-2xl">
-                <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h2 class="text-2xl font-bold tracking-tight mb-2 text-white">Verificação de Maioridade</h2>
-            <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                Este site comercializa produtos restritos a maiores de 18 anos. Você confirma que tem idade legal para consumir vaporizadores?
-            </p>
-            <div class="flex gap-3">
-                <button onclick="verifyAge(true)" class="flex-1 bg-brandAccent hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl transition duration-200">
-                    Sim, tenho 18+
-                </button>
-                <button onclick="verifyAge(false)" class="flex-1 bg-cardBorder hover:bg-gray-800 text-gray-300 font-semibold py-3 px-6 rounded-xl transition duration-200">
-                    Não
-                </button>
+    <!-- Verificação de Idade +18 -->
+    <div id="age-modal">
+        <div class="modal-content">
+            <h2><i class="fa-solid fa-sun"></i> VAPE EXPRESS</h2>
+            <p>Seja bem-vindo! Este site contém produtos exclusivos para maiores de 18 anos. Você confirma ter idade legal?</p>
+            <div class="modal-buttons">
+                <button class="btn-modal btn-yes" onclick="fecharModal()">Sou +18 (Entrar)</button>
+                <button class="btn-modal btn-no" onclick="window.location.href='https://google.com'">Sair</button>
             </div>
         </div>
     </div>
 
-    <div id="toast" class="fixed bottom-24 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-cardBg border border-brandAccent text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3">
-        <i class="fa-solid fa-circle-check text-brandAccent text-lg"></i>
-        <span id="toastMessage" class="text-sm font-medium">Produto adicionado ao carrinho</span>
+    <!-- Banner Pôr do Sol Litoral -->
+    <div class="hero-banner">
+        <div class="nav-bar">
+            <div></div>
+            <button class="cart-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-umbrella-beach"></i> Carrinho (<span id="cart-count">0</span>)
+            </button>
+        </div>
+
+        <div class="brand-title"><i class="fa-solid fa-sun"></i> VAPE EXPRESS</div>
+        <div class="brand-subtitle">Vibes do Litoral & Pods Premium</div>
+        
+        <div class="beach-vibes">
+            <span><i class="fa-solid fa-volleyball"></i> Entrega Rápida</span> • 
+            <span><i class="fa-solid fa-water"></i> Litoral Norte</span> • 
+            <span><i class="fa-solid fa-bolt"></i> PixGo / Cartão</span>
+        </div>
     </div>
 
-    <a href="https://wa.me/5512981029417?text=Olá! Vim pelo site da VapeExpress e gostaria de tirar algumas dúvidas." target="_blank" class="fixed bottom-6 right-6 z-40 bg-whatsapp hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 group" aria-label="WhatsApp">
-        <i class="fa-brands fa-whatsapp text-2xl"></i>
-        <span class="absolute right-16 bg-cardBg border border-cardBorder text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap shadow-md pointer-events-none">
-            Atendimento WhatsApp
-        </span>
+    <!-- Catálogo de Produtos -->
+    <div class="container">
+        <div class="section-title">
+            <i class="fa-solid fa-fire-flame-curved"></i> Coleção EBCREATE BC PRO 2026
+        </div>
+        
+        <div class="grid" id="product-grid">
+            <!-- Produtos renderizados via JavaScript chamando as fotos reais do GitHub -->
+        </div>
+    </div>
+
+    <!-- Carrinho Lateral -->
+    <div id="cart-modal">
+        <div class="cart-header">
+            <h3 style="color:#fff;"><i class="fa-solid fa-cart-shopping"></i> Seu Pedido</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-body" id="cart-items">
+            <p style="color: var(--text-muted); text-align: center; margin-top: 20px;">Nenhum produto selecionado.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total-text">
+                <span>Total:</span>
+                <span id="cart-total" style="color: var(--sunset-yellow);">R$ 0,00</span>
+            </div>
+            <button class="btn-checkout" onclick="finalizarCompraWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Enviar Pedido no WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5512981029417?text=Olá!%20Vim%20pelo%20site%20da%20VapeExpress%20e%20gostaria%20de%20tirar%20dúvidas." target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <header class="sticky top-0 z-40 bg-darkBg/90 backdrop-blur-md border-b border-cardBorder">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brandAccent to-blue-400 flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-white">
-                    VAPE<span class="text-brandAccent">EXPRESS</span>
-                </span>
-            </a>
-
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-                <a href="#catalogo" class="hover:text-brandAccent transition">Coleção BC PRO 2026</a>
-                <a href="#destaques" class="hover:text-brandAccent transition">Destaques</a>
-                <a href="#contato" class="hover:text-brandAccent transition">Atendimento</a>
-            </nav>
-
-            <div class="flex items-center gap-3">
-                <button onclick="toggleCart()" class="relative bg-cardBg border border-cardBorder hover:border-brandAccent p-3 rounded-xl transition text-gray-300 hover:text-white">
-                    <i class="fa-solid fa-bag-shopping text-lg"></i>
-                    <span id="cartCount" class="absolute -top-1.5 -right-1.5 bg-brandAccent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <section class="relative overflow-hidden py-16 lg:py-24 border-b border-cardBorder bg-gradient-to-b from-cardBg/30 to-darkBg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-cardBg border border-cardBorder px-3.5 py-1.5 rounded-full text-xs font-semibold text-brandAccent">
-                        <i class="fa-solid fa-certificate"></i> Linha Oficial EBCREATE BC PRO 2026
-                    </div>
-                    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-                        EBCREATE <span class="text-brandAccent">BC PRO 2026</span>
-                    </h1>
-                    <p class="text-gray-400 text-base leading-relaxed max-w-lg">
-                        Disponíveis em estoque os novos modelos de alta performance. Sabores exclusivos importados com selo de originalidade e entrega imediata.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                        <a href="#catalogo" class="bg-brandAccent hover:bg-blue-600 text-white font-semibold py-3.5 px-7 rounded-xl transition text-center shadow-lg">
-                            Ver Sabores Disponíveis
-                        </a>
-                        <a href="https://wa.me/5512981029417?text=Olá! Gostaria de consultar a disponibilidade de sabores." target="_blank" class="bg-cardBg border border-cardBorder hover:border-whatsapp text-gray-200 hover:text-whatsapp font-semibold py-3.5 px-7 rounded-xl transition text-center flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Pedir pelo WhatsApp
-                        </a>
-                    </div>
-                </div>
-                <div class="relative flex justify-center">
-                    <div class="relative bg-cardBg border border-cardBorder rounded-2xl p-3 shadow-2xl max-w-md w-full">
-                        <img src="image.png" alt="EBCREATE BC PRO 2026 Estoque Real" class="rounded-xl object-cover w-full h-80 sm:h-96" onerror="this.src='https://placehold.co/600x600/131924/3b82f6?text=VapeExpress+Estoque'">
-                        <div class="mt-3 flex items-center justify-between px-2 text-xs text-gray-400">
-                            <span><i class="fa-solid fa-box-open text-brandAccent mr-1"></i> Lote Original Lacrado</span>
-                            <span class="text-green-400 font-semibold">Em Estoque</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="catalogo" class="py-20 flex-1">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-                <div>
-                    <span class="text-brandAccent text-xs font-bold uppercase tracking-wider">Catálogo Oficial</span>
-                    <h2 class="text-3xl font-bold text-white mt-1">EBCREATE BC PRO 2026</h2>
-                </div>
-                <p class="text-gray-400 text-sm mt-2 md:mt-0">Selecione o seu sabor favorito abaixo</p>
-            </div>
-
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Preenchido via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleCart()"></div>
-        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
-            <div class="w-screen max-w-md bg-cardBg border-l border-cardBorder flex flex-col shadow-2xl">
-                <div class="p-6 border-b border-cardBorder flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-bag-shopping text-brandAccent"></i>
-                        <h3 class="text-lg font-bold text-white">Carrinho de Compras</h3>
-                    </div>
-                    <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2">
-                        <i class="fa-solid fa-xmark text-lg"></i>
-                    </button>
-                </div>
-
-                <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4">
-                    <p class="text-gray-500 text-center py-10">Seu carrinho está vazio.</p>
-                </div>
-
-                <div class="p-6 border-t border-cardBorder space-y-4 bg-darkBg">
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-400">Total do Pedido</span>
-                        <span id="cartTotal" class="text-white font-bold text-lg">R$ 0,00</span>
-                    </div>
-
-                    <!-- Opções de Pagamento -->
-                    <div class="space-y-2 pt-2">
-                        <label class="text-xs font-semibold text-gray-400 block">Forma de Pagamento:</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button type="button" onclick="setPaymentMethod('whatsapp')" id="payWhatsappBtn" class="bg-whatsapp/20 border border-whatsapp text-white text-xs font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-whatsapp text-base"></i> WhatsApp
-                            </button>
-                            <button type="button" onclick="setPaymentMethod('link')" id="payLinkBtn" class="bg-cardBorder border border-cardBorder text-gray-300 text-xs font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-credit-card text-brandAccent text-base"></i> Link Pagamento
-                            </button>
-                        </div>
-                    </div>
-
-                    <button onclick="checkout()" class="w-full bg-brandAccent hover:bg-blue-600 text-white font-semibold py-4 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
-                        <span id="checkoutBtnText">Finalizar Pedido via WhatsApp</span>
-                        <i id="checkoutBtnIcon" class="fa-brands fa-whatsapp text-lg"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="paymentModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden px-4">
-        <div class="bg-cardBg border border-cardBorder rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl relative">
-            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="w-12 h-12 bg-brandAccent/10 text-brandAccent rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                <i class="fa-solid fa-link"></i>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-1">Link de Pagamento Gerado</h3>
-            <p class="text-xs text-gray-400 mb-4">Simulação de link seguro para pagamento com Cartão ou Pix.</p>
-            
-            <div class="bg-darkBg border border-cardBorder p-3 rounded-xl mb-4 text-xs font-mono text-brandAccent break-all select-all">
-                https://vapeexpress.pay/checkout?ref=vx_<span id="paymentRefCode">2026</span>
-            </div>
-
-            <button onclick="confirmOnlinePayment()" class="w-full bg-brandAccent hover:bg-blue-600 text-white font-semibold py-3 rounded-xl transition text-sm">
-                Simular Pagamento Aprovado
-            </button>
-        </div>
-    </div>
-
-    <footer id="contato" class="bg-cardBg border-t border-cardBorder py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-brandAccent flex items-center justify-center text-white font-bold">
-                    <i class="fa-solid fa-bolt text-sm"></i>
-                </div>
-                <span class="text-lg font-bold text-white">VAPEEXPRESS</span>
-            </div>
-            <p class="text-xs text-gray-500 text-center md:text-left">
-                Venda proibida para menores de 18 anos. WhatsApp: (12) 98102-9417.
-            </p>
-            <div class="flex items-center gap-4 text-gray-400">
-                <a href="https://wa.me/5512981029417" target="_blank" class="hover:text-whatsapp transition"><i class="fa-brands fa-whatsapp text-lg"></i></a>
-                <a href="#" class="hover:text-brandAccent transition"><i class="fa-brands fa-instagram text-lg"></i></a>
-            </div>
-        </div>
+    <footer>
+        <p>&copy; 2026 VAPE EXPRESS. Todos os direitos reservados. Proibida a venda para menores de 18 anos.</p>
     </footer>
 
     <script>
-        const products = [
-            { id: 1, name: "EBCREATE BC PRO 2026", flavor: "Blackberry Grape", price: 119.90, image: "image.png" },
-            { id: 2, name: "EBCREATE BC PRO 2026", flavor: "Watermelon Peach Frost", price: 119.90, image: "image.png" },
-            { id: 3, name: "EBCREATE BC PRO 2026", flavor: "Triple Berry", price: 119.90, image: "image.png" },
-            { id: 4, name: "EBCREATE BC PRO 2026", flavor: "Toasted Pineapple", price: 119.90, image: "image.png" },
-            { id: 5, name: "EBCREATE BC PRO 2026", flavor: "Black Mint", price: 119.90, image: "image.png" },
-            { id: 6, name: "EBCREATE BC PRO 2026", flavor: "Sour Apple Ice", price: 119.90, image: "image.png" },
-            { id: 7, name: "EBCREATE BC PRO 2026", flavor: "Golden Berry", price: 119.90, image: "image.png" },
-            { id: 8, name: "EBCREATE BC PRO 2026", flavor: "Sour Apple", price: 119.90, image: "image.png" },
-            { id: 9, name: "EBCREATE BC PRO 2026", flavor: "Aurora Berries", price: 119.90, image: "image.png" },
-            { id: 10, name: "EBCREATE BC PRO 2026", flavor: "Raspberry Mallo", price: 119.90, image: "image.png" }
+        // Mapeamento dos produtos conforme as imagens salvas no seu GitHub
+        const produtos = [
+            { id: 1, nome: "EBCREATE BC PRO 2026", sabor: "Blackberry Grape", img: "EBCREATE BC PRO 2026 Blackberry Grape.JPG", preco: 85.00 },
+            { id: 2, nome: "EBCREATE BC PRO 2026", sabor: "Watermelon Peach Frost", img: "EBCREATE BC PRO 2026 Watermelon Peach Frost.JPG", preco: 85.00 },
+            { id: 3, nome: "EBCREATE BC PRO 2026", sabor: "Triple Berry", img: "Triple Berry.JPG", preco: 85.00 },
+            { id: 4, nome: "EBCREATE BC PRO 2026", sabor: "Toasted Pineapple", img: "Toasted Pineapple.JPG", preco: 85.00 },
+            { id: 5, nome: "EBCREATE BC PRO 2026", sabor: "Black Mint", img: "Black Mint.JPG", preco: 85.00 },
+            { id: 6, nome: "EBCREATE BC PRO 2026", sabor: "Sour Apple Ice", img: "Sour Apple Ice.JPG", preco: 85.00 },
+            { id: 7, nome: "EBCREATE BC PRO 2026", sabor: "Golden Berry", img: "Golden Berry.JPG", preco: 85.00 },
+            { id: 8, nome: "EBCREATE BC PRO 2026", sabor: "Sour Apple", img: "Sour Apple.JPG", preco: 85.00 },
+            { id: 9, nome: "EBCREATE BC PRO 2026", sabor: "Aurora Berries", img: "Aurora Berries.JPG", preco: 85.00 },
+            { id: 10, nome: "EBCREATE BC PRO 2026", sabor: "Raspberry Mallo", img: "Raspberry Mallo.JPG", preco: 85.00 }
         ];
 
-        let cart = [];
-        let selectedPaymentMethod = 'whatsapp'; // 'whatsapp' ou 'link'
+        let carrinho = [];
 
-        function verifyAge(allowed) {
-            const modal = document.getElementById('ageModal');
-            if (allowed) {
-                modal.classList.add('hidden');
-                showToast("Acesso liberado. Bem-vindo à VapeExpress!");
-            } else {
-                alert("Acesso restrito para menores de idade.");
-                window.location.href = "https://www.google.com";
-            }
+        function fecharModal() {
+            document.getElementById('age-modal').style.display = 'none';
         }
 
-        function renderProducts() {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = '';
-
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.className = "bg-cardBg border border-cardBorder rounded-2xl p-4 flex flex-col justify-between hover:border-brandAccent transition duration-300 group";
-                card.innerHTML = `
-                    <div class="relative overflow-hidden rounded-xl mb-4 bg-darkBg h-52 flex items-center justify-center">
-                        <span class="absolute top-3 left-3 z-10 bg-darkBg/90 backdrop-blur-sm border border-brandAccent/40 text-brandAccent text-xs font-semibold px-2.5 py-1 rounded-lg">BC PRO 2026</span>
-                        <img src="${product.image}" alt="${product.flavor}" class="object-cover w-full h-full group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x400/131924/3b82f6?text=EBCREATE'">
+        function renderProdutos() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = produtos.map(p => `
+                <div class="card">
+                    <div>
+                        <div class="card-img-wrapper">
+                            <img src="${p.img}" alt="${p.sabor}" onerror="this.src='https://via.placeholder.com/300x300/1e293b/ffffff?text=${encodeURIComponent(p.sabor)}'">
+                        </div>
+                        <h3>${p.nome}</h3>
+                        <div class="flavor"><i class="fa-solid fa-wine-glass-stripe"></i> ${p.sabor}</div>
                     </div>
-                    <div class="mb-4">
-                        <h3 class="font-bold text-white text-base">${product.name}</h3>
-                        <p class="text-brandAccent font-medium text-sm mt-0.5"><i class="fa-solid fa-droplet mr-1 text-xs"></i> ${product.flavor}</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-3 border-t border-cardBorder mt-auto">
-                        <span class="text-white font-bold text-lg">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
-                        <button onclick="addToCart(${product.id})" class="bg-cardBorder hover:bg-brandAccent text-white p-3 rounded-xl transition duration-200 shadow-sm flex items-center justify-center">
-                            <i class="fa-solid fa-cart-plus"></i>
+                    <div class="card-footer">
+                        <div class="price">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>
+                        <button class="btn-add" onclick="adicionarAoCarrinho(${p.id})">
+                            <i class="fa-solid fa-plus"></i> Pegar
                         </button>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
+                </div>
+            `).join('');
         }
 
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId);
-
-            if (existing) {
-                existing.quantity += 1;
+        function adicionarAoCarrinho(id) {
+            const produto = produtos.find(p => p.id === id);
+            const itemExistente = carrinho.find(item => item.id === id);
+            
+            if (itemExistente) {
+                itemExistente.qtd++;
             } else {
-                cart.push({ ...product, quantity: 1 });
+                carrinho.push({ ...produto, qtd: 1 });
             }
-
-            updateCartUI();
-            showToast(`${product.flavor} adicionado ao carrinho!`);
+            atualizarCarrinho();
+            toggleCart();
         }
 
-        function updateCartUI() {
-            const countEl = document.getElementById('cartCount');
-            const itemsEl = document.getElementById('cartItems');
-            const totalEl = document.getElementById('cartTotal');
+        function atualizarCarrinho() {
+            const container = document.getElementById('cart-items');
+            const count = document.getElementById('cart-count');
+            const totalEl = document.getElementById('cart-total');
 
-            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            countEl.innerText = totalCount;
+            count.innerText = carrinho.reduce((acc, item) => acc + item.qtd, 0);
 
-            if (cart.length === 0) {
-                itemsEl.innerHTML = `<p class="text-gray-500 text-center py-10">Seu carrinho está vazio.</p>`;
-                totalEl.innerText = "R$ 0,00";
+            if (carrinho.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 20px;">Nenhum produto selecionado.</p>';
+                totalEl.innerText = 'R$ 0,00';
                 return;
             }
 
-            itemsEl.innerHTML = '';
-            let subtotal = 0;
-
-            cart.forEach(item => {
-                subtotal += item.price * item.quantity;
-                const div = document.createElement('div');
-                div.className = "flex items-center justify-between gap-3 bg-darkBg border border-cardBorder p-3 rounded-xl";
-                div.innerHTML = `
-                    <div class="flex-1">
-                        <h4 class="font-bold text-sm text-white">${item.name}</h4>
-                        <p class="text-xs text-brandAccent font-medium">${item.flavor}</p>
-                        <span class="text-xs text-gray-400">Qtd: ${item.quantity} x R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+            container.innerHTML = carrinho.map(item => `
+                <div class="cart-item">
+                    <div>
+                        <strong style="color:#fff;">${item.sabor}</strong><br>
+                        <small style="color: var(--sunset-yellow)">R$ ${item.preco.toFixed(2).replace('.', ',')} x ${item.qtd}</small>
                     </div>
-                    <button onclick="removeItem(${item.id})" class="text-gray-500 hover:text-red-400 p-2">
-                        <i class="fa-solid fa-trash text-sm"></i>
-                    </button>
-                `;
-                itemsEl.appendChild(div);
-            });
+                    <button onclick="removerItem(${item.id})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size: 1.1rem;"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
 
-            totalEl.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            const total = carrinho.reduce((acc, item) => acc + (item.preco * item.qtd), 0);
+            totalEl.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
         }
 
-        function removeItem(productId) {
-            cart = cart.filter(i => i.id !== productId);
-            updateCartUI();
+        function removerItem(id) {
+            carrinho = carrinho.filter(item => item.id !== id);
+            atualizarCarrinho();
         }
 
         function toggleCart() {
-            document.getElementById('cartDrawer').classList.toggle('hidden');
+            document.getElementById('cart-modal').classList.toggle('open');
         }
 
-        function setPaymentMethod(method) {
-            selectedPaymentMethod = method;
-            const btnWhatsapp = document.getElementById('payWhatsappBtn');
-            const btnLink = document.getElementById('payLinkBtn');
-            const btnText = document.getElementById('checkoutBtnText');
-            const btnIcon = document.getElementById('checkoutBtnIcon');
+        function finalizarCompraWhatsApp() {
+            if (carrinho.length === 0) return alert('Seu carrinho está vazio!');
 
-            if (method === 'whatsapp') {
-                btnWhatsapp.className = "bg-whatsapp/20 border border-whatsapp text-white text-xs font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2";
-                btnLink.className = "bg-cardBorder border border-cardBorder text-gray-300 text-xs font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2";
-                btnText.innerText = "Finalizar Pedido via WhatsApp";
-                btnIcon.className = "fa-brands fa-whatsapp text-lg";
-            } else {
-                btnLink.className = "bg-brandAccent/20 border border-brandAccent text-white text-xs font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2";
-                btnWhatsapp.className = "bg-cardBorder border border-cardBorder text-gray-300 text-xs font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2";
-                btnText.innerText = "Gerar Link de Pagamento";
-                btnIcon.className = "fa-solid fa-credit-card text-lg";
-            }
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                showToast("Adicione itens ao carrinho primeiro!");
-                return;
-            }
-
+            let texto = "Olá! Gostaria de finalizar meu pedido no *VAPE EXPRESS*:%0A%0A";
             let total = 0;
-            cart.forEach(item => { total += item.price * item.quantity; });
 
-            if (selectedPaymentMethod === 'whatsapp') {
-                let message = "Olá! Gostaria de encomendar os seguintes produtos na VapeExpress:\n\n";
-                cart.forEach(item => {
-                    const sub = item.price * item.quantity;
-                    message += `- ${item.quantity}x ${item.name} (${item.flavor}) - R$ ${sub.toFixed(2).replace('.', ',')}\n`;
-                });
-                message += `\n*Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\nComo proceder com o pagamento e entrega?`;
-
-                window.open(`https://wa.me/5512981029417?text=${encodeURIComponent(message)}`, '_blank');
-            } else {
-                // Abre modal simulando link de pagamento
-                document.getElementById('paymentRefCode').innerText = Math.floor(Math.random() * 89999 + 10000);
-                document.getElementById('paymentModal').classList.remove('hidden');
-            }
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.add('hidden');
-        }
-
-        function confirmOnlinePayment() {
-            closePaymentModal();
-            toggleCart();
-            
-            let message = "Olá! Acabei de realizar o pagamento via Link de Pagamento para o pedido:\n\n";
-            cart.forEach(item => {
-                message += `- ${item.quantity}x ${item.name} (${item.flavor})\n`;
+            carrinho.forEach(item => {
+                texto += `🏖️ *${item.qtd}x* ${item.nome} (${item.sabor}) - R$ ${(item.preco * item.qtd).toFixed(2).replace('.', ',')}%0A`;
+                total += item.preco * item.qtd;
             });
-            message += `\nSeguem os meus dados de entrega.`;
 
-            cart = [];
-            updateCartUI();
-            
-            window.open(`https://wa.me/5512981029417?text=${encodeURIComponent(message)}`, '_blank');
+            texto += `%0A*Total: R$ ${total.toFixed(2).replace('.', ',')}*%0APagamento via: (PixGo / Cartão)`;
+
+            window.open(`https://wa.me/5512981029417?text=${texto}`, '_blank');
         }
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMessage').innerText = msg;
-            toast.classList.remove('translate-y-32', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-32', 'opacity-0');
-            }, 3000);
-        }
-
-        window.onload = function() {
-            renderProducts();
-        }
+        renderProdutos();
     </script>
 </body>
 </html>
